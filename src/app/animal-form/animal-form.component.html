@@ -1,0 +1,56 @@
+<div class="container">
+    <h1>Create new animal</h1>
+    <!-- (ngSubmit) is the event triggered upon push of submit button -->
+    <!-- Set form as valid and use onSubmit method to log -->
+    <form #animalForm="ngForm" (ngSubmit)="animalForm.form.valid && onSubmit(animalForm)" >
+        <div class="mb-3">
+            <label for="id" class="form-label">ID: </label>
+            <!-- Specify input as ngModel and tag it to id -->
+            <!-- is-invalid is true if animalForm.submitted is true and id.errors is true -->
+            <input type="number" name="id" id="id" class="form-control" placeholder="Unique ID" #id="ngModel" ngModel required
+            [ngClass]="{'is-invalid':animalForm.submitted && id.errors}">
+            <div class="invalid-feedback">
+                Please provide an ID.
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name: </label>
+                <!-- Specify input as ngModel and tag it to name -->
+                <!-- is-invalid is true if animalForm.submitted is true and name.errors is true -->
+                <input type="text" name="name" id="name" class="form-control" placeholder="Animal Name" #name="ngModel" ngModel required minlength="3" maxlength="20"
+                [ngClass]="{'is-invalid':animalForm.submitted && name.errors}">
+                <div *ngIf="animalForm.submitted && name.errors" class="invalid-feedback">
+                    <div *ngIf="name.errors['required']">
+                        Animal name is required.
+                    </div>
+                    <div *ngIf="name.errors['minlength']">
+                        Animal name must be more than 3 characters.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lifespan" class="form-label">Lifespan: </label>
+                <!-- Specify input as ngModel and tag it to lifespan -->
+                <!-- is-invalid is true if animalForm.submitted is true and lifespan.errors is true -->
+                <input type="number" name="lifespan" id="lifespan" class="form-control" placeholder="Animal Lifespan (in years)" #lifespan="ngModel" ngModel>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email: </label>
+                <!-- Specify input as ngModel and tag it to email -->
+                <!-- is-invalid is true if animalForm.submitted is true and email.errors is true -->
+                <input type="text" name="email" id="email" class="form-control" placeholder="Animal Email" #email="ngModel" ngModel required email
+                [ngClass]="{'is-invalid':animalForm.submitted && email.errors}">
+                <div *ngIf="animalForm.submitted && email.errors" class="invalid-feedback">
+                    <div *ngIf="email.errors['required']">
+                        Animal email is required.
+                    </div>
+                    <div *ngIf="email.errors['email']">
+                        Animal email must be of correct format.
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-secondary" (click)="onReset(animalForm)">Clear</button>
+        </div>
+    </form>
+</div>

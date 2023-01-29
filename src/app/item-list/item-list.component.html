@@ -1,0 +1,6 @@
+<h3>{{ title }}</h3>
+<ul>
+    <!-- for-loop to retrieve all item from itemList in input (which takes in items array defined in app.component)  -->
+    <!-- onItemClick takes in item and pass it on to newItemEvent (sending it as output to app.component) -->
+    <li *ngFor="let item of itemList" (click)="onItemClick(item)">{{ item.name }}</li>
+</ul>
